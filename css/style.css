@@ -251,9 +251,16 @@ html {
     user-select: none;
 }
 
-.pin--1 { top: 30%; left: 63%; }
-.pin--2 { top: 5%;  left: 45%; }
-.pin--3 { top: 56%; left: 18%; }
+.pin {
+    /* Якорь — центр точки: left/top задают положение точки на карте,
+       подпись всегда над ней. Так метки не «прыгают» при смене размера. */
+    align-items: center;
+    transform: translate(-50%, calc(-100% + 13px));
+}
+
+.pin--1 { top: 52%;   left: 75%; }
+.pin--2 { top: 37.5%; left: 45%; }
+.pin--3 { top: 66%;   left: 26%; }
 
 .pin__label {
     padding: 8px 12px;
@@ -349,13 +356,12 @@ html {
 }
 
 .groups__list {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
     gap: 24px;
 }
 
 .group {
-    flex: 1 1 280px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
@@ -745,10 +751,6 @@ html {
         display: none;
     }
 
-    .pin--1 { top: 3%;  left: 5%; }
-    .pin--2 { top: 27%; left: 46%; }
-    .pin--3 { top: 47%; left: 5%; }
-
     .field {
         flex: none;
     }
@@ -780,10 +782,6 @@ html {
     .map {
         height: 340px;
     }
-
-    .pin--1 { top: 3%;  left: 5%; }
-    .pin--2 { top: 25%; left: auto; right: 5%; align-items: flex-end; }
-    .pin--3 { top: 50%; left: 5%; }
 
     .header .logo__text {
         display: none;

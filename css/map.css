@@ -175,6 +175,34 @@
     font: inherit;
 }
 
+/* Курсор карты: открытая рука, а при перетаскивании — сжатая */
+.map-area__canvas,
+.map-area__canvas * {
+    cursor: grab !important;
+}
+
+.map-area__canvas .ypin,
+.map-area__canvas button,
+.map-area__canvas a,
+.map-area__canvas [role="button"] {
+    cursor: pointer !important;
+}
+
+.map-area__canvas .ypopup,
+.map-area__canvas .ypopup * {
+    cursor: default !important;
+}
+
+.map-area__canvas .ypopup button,
+.map-area__canvas .ypopup a {
+    cursor: pointer !important;
+}
+
+.map-area__canvas.is-dragging,
+.map-area__canvas.is-dragging * {
+    cursor: grabbing !important;
+}
+
 .map-area__add {
     position: absolute;
     top: 24px;

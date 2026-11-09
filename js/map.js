@@ -8,11 +8,11 @@
     }
 
     if (typeof ymaps3 === 'undefined') {
-        showError('Не удалось загрузить Яндекс Карты. Проверьте интернет и API-ключ в map.html.');
+        showError('Не удалось загрузить Яндекс Карты...');
         return;
     }
 
-    var GRODNO = [23.8295, 53.6778];
+    var GRODNO = [23.8295, 53.6778]; // долгота, широта
 
     var GROUPS = [
         { id: 1, sport: 'volleyball', name: 'Волейбол', time: '18:00', place: 'Парк Жилибера',
@@ -28,7 +28,7 @@
         soon: { text: 'Нужен 1 игрок', chip: 'chip--amber', pin: 'ypin--accent' }
     };
 
-    function lngLat(g) { return [g.lng, g.lat]; }
+    function lngLat(g) { return [g.lng, g.lat]; } // Берёт группу и возвращает пару координат в нужном Яндексу порядке
 
     function popupHtml(g) {
         var st = STATUS[g.status];
@@ -58,8 +58,19 @@
             [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]
         );
 
-        // 3. Кнопки масштаба «+ / −» лежат в отдельном пакете Яндекса.
-        //    Если пакет не загрузится, карта всё равно будет работать (колесо мыши, жесты).
+        // Курсор «сжатая рука»
+        mapBox.addEventListener('pointerdown', function (e) {
+            if (e.button !== 0) return;
+            if (e.target.closest('.ymarker, button, a, [role="button"]')) return;
+            mapBox.classList.add('is-dragging');
+        });
+        ['pointerup', 'pointercancel', 'blur'].forEach(function (name) {
+            window.addEventListener(name, function () {
+                mapBox.classList.remove('is-dragging');
+            });
+        });
+
+        // 3. Кнопки масштаба «+ / −» лежат в отдельном пакете Яндекса
         try {
             ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}',
                 ['@yandex/ymaps3-default-ui-theme@0.0']);
@@ -155,7 +166,6 @@
             if (event.key === 'Escape') closePopup();
         });
 
-        // Клик по пустому месту карты закрывает карточку (иначе она закрывает соседние метки)
         mapBox.addEventListener('click', function (event) {
             if (!event.target.closest('.ymarker')) closePopup();
         });
