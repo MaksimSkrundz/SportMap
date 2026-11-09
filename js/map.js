@@ -20,12 +20,15 @@
         { id: 2, sport: 'badminton', name: 'Бадминтон', time: '19:30', place: 'Спорткомплекс в центре',
           have: 1, total: 2, status: 'soon', chat: '17:30', lat: 53.6781, lng: 23.8295 },
         { id: 3, sport: 'basketball', name: 'Баскетбол', time: '20:00', place: 'Площадка у ЦСК «Неман»',
-          have: 4, total: 10, status: 'open', chat: '18:00', lat: 53.6742, lng: 23.8418 }
+          have: 4, total: 10, status: 'open', chat: '18:00', lat: 53.6742, lng: 23.8418 },
+        { id: 4, sport: 'tennis', name: 'Теннис', time: '21:00', place: 'Корты на Фолюш',
+          have: 4, total: 4, status: 'full', chat: '19:00', lat: 53.6650, lng: 23.8350 }
     ];
 
     var STATUS = {
         open: { text: 'Набирается', chip: 'chip--soft', pin: 'ypin--primary' },
-        soon: { text: 'Нужен 1 игрок', chip: 'chip--amber', pin: 'ypin--accent' }
+        soon: { text: 'Нужен 1 игрок', chip: 'chip--amber', pin: 'ypin--accent' },
+        full: { text: 'Набрано', chip: 'chip--full', pin: 'ypin--full' }
     };
 
     function lngLat(g) { return [g.lng, g.lat]; } // Берёт группу и возвращает пару координат в нужном Яндексу порядке
@@ -37,7 +40,9 @@
             '<h3 class="gp__title">' + g.name + ' · ' + g.time + '</h3>' +
             '<p class="gp__text">' + g.place + '</p>' +
             '<p class="gp__text">' + g.have + ' из ' + g.total + ' · чат с ' + g.chat + '</p>' +
-            '<a class="btn btn--primary gp__btn" href="#">Присоединиться</a>' +
+            (g.status === 'full'
+                ? '<span class="btn gp__btn gp__btn--full">Группа набрана</span>'
+                : '<a class="btn btn--primary gp__btn" href="#">Присоединиться</a>') +
             '</div>';
     }
 
@@ -198,8 +203,22 @@
             link.addEventListener('click', function (event) {
                 event.preventDefault();
                 var id = Number(link.dataset.group);
-                map.setLocation({ center: lngLat(items[id].group), zoom: 15, duration: 600 });
+                var FLY_MS = 600;
+
+                map.setLocation({ center: lngLat(items[id].group), zoom: 15, duration: FLY_MS });
                 openPopup(id);
+
+                // Пока карта едет к метке, сбрасываем сдвиг карточки: он был посчитан для старого положения
+                var popup = items[id].popup;
+                popup.style.transform = '';
+                popup.style.setProperty('--shift', '0px');
+                popup.classList.remove('ypopup--below');
+
+                // Когда карта доехала, считаем положение карточки заново (уже для нового положения метки)
+                setTimeout(function () {
+                    if (openedId === id) keepInside(popup);
+                }, FLY_MS + 100);
+
                 // На телефоне карта над списком: возвращаем её в поле зрения
                 mapBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });

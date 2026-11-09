@@ -244,8 +244,9 @@
 }
 
 .legend__dot--primary { background: var(--primary); }
-.legend__dot--accent  { background: var(--accent); }
-.legend__dot--ink     { background: var(--ink); }
+.legend__dot--accent { background: var(--accent); }
+.legend__dot--ink { background: var(--ink); }
+.legend__dot--full { background: var(--full); }
 
 /* ===== Карточка выбранной группы ===== */
 .popup {
@@ -470,7 +471,8 @@
 }
 
 .ypin--primary { background: var(--primary); }
-.ypin--accent  { background: var(--accent); }
+.ypin--accent { background: var(--accent); }
+.ypin--full { background: var(--full); }
 
 /* Карточка стоит НАД меткой (bottom больше радиуса метки), поэтому метку не закрывает */
 .ypopup {
@@ -561,6 +563,14 @@
     margin-top: 6px;
     padding: 10px 14px;
     font-size: 14px;
+}
+
+.gp__btn--full {
+    background: #E2E8F0;
+    border-color: #E2E8F0;
+    color: var(--muted);
+    cursor: default;
+    pointer-events: none;
 }
 
 .map__error {
