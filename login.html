@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Вход - Найди партнёра</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body>
+    <div class="login">
+        <aside class="promo">
+            <a class="logo" href="index.html">
+                <svg class="logo__mark" viewBox="0 0 52 52" width="36" height="36" aria-hidden="true">
+                    <path class="logo__pin" d="M26 2C14 2 6 11 6 22c0 13 20 28 20 28s20-15 20-28C46 11 38 2 26 2z"></path>
+                    <circle class="logo__hole" cx="26" cy="22" r="11"></circle>
+                    <circle class="logo__dot" cx="26" cy="22" r="5"></circle>
+                </svg>
+                <span class="logo__text">Найди партнёра</span>
+            </a>
+            <div class="promo__body">
+                <p class="promo__title">Найди партнёра для игры уже сегодня</p>
+                <p class="promo__text">
+                    Поставь метку на карте Гродно, и мы соберём группу
+                    и откроем мини-чат за 2 часа до встречи.
+                </p>
+            </div>
+            <ul class="benefits">
+                <li class="benefits__item">Группы по времени и месту</li>
+                <li class="benefits__item">Мини-чат на 2 часа</li>
+                <li class="benefits__item">Волейбол, баскетбол, футбол и другое</li>
+            </ul>
+        </aside>
+
+        <main class="login__main">
+            <div class="card">
+                <h1 class="card__title">Войти</h1>
+                <p class="card__lead">Введите логин и пароль, чтобы откликаться на группы и писать в чат.</p>
+                <form class="form" action="#" method="post">
+                    <div class="field">
+                        <label class="field__label" for="login">Логин</label>
+                        <input class="field__control" id="login" name="login" type="text" 
+                        placeholder="Ваш логин" autocomplete="username" required>
+                    </div>
+                    <div class="field">
+                        <div class="field__head">
+                            <label class="field__label" for="password">Пароль</label>
+                        </div>
+                        <input class="field__control" id="password" name="password" type="password"
+                        placeholder="Пароль" autocomplete="current-password" required>
+                        <a class="field__link" href="forgot.html">Забыли пароль?</a>
+                    </div>
+                    <button class="btn btn--primary btn--lg" type="submit">Войти</button>
+                </form>
+                <p class="card__switch">
+                    Нет аккаунта?
+                    <a class="card__link" href="register.html">Зарегистрироваться</a>
+                </p>
+            </div>
+        </main>
+    </div>
+</body>
+</html>

@@ -1,0 +1,628 @@
+/* ===== Каркас страницы карты ===== */
+.nav__link--active {
+    color: var(--primary);
+}
+
+.map-page {
+    display: flex;
+}
+
+/* ===== Левая панель ===== */
+.sidebar {
+    flex: 0 0 420px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 24px;
+    border-right: 1px solid var(--border);
+    background: #fff;
+}
+
+.sidebar__title {
+    text-align: center;
+    margin: 0;
+    font-size: 24px;
+    line-height: 1.2;
+}
+
+.sidebar__count {
+    margin: 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.sidebar .field__control {
+    flex: none;
+}
+
+/* ===== Фильтры ===== */
+.filters {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.filters__group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.filters__title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.filters__row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.filter {
+    position: relative;
+    cursor: pointer;
+}
+
+/* Радиокнопка скрыта, но доступна с клавиатуры */
+.filter__input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+}
+
+.filter__text {
+    display: inline-flex;
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: #fff;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.filter:hover .filter__text {
+    border-color: var(--primary);
+}
+
+.filter__input:checked + .filter__text {
+    border-color: var(--primary);
+    background: var(--primary);
+    color: #fff;
+}
+
+.filter__input:focus-visible + .filter__text {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+/* ===== Список найденных групп ===== */
+.results {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.result {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding: 16px;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    background: #fff;
+    color: var(--ink);
+    text-decoration: none;
+}
+
+.result:hover {
+    border-color: var(--primary);
+}
+
+.result--active {
+    border-color: var(--primary);
+    background: #F0FDFA;
+    box-shadow: inset 0 0 0 1px var(--primary);
+}
+
+.result__row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.result__time {
+    font-size: 15px;
+    font-weight: 700;
+}
+
+.result__name {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.result__text {
+    font-size: 14px;
+    color: var(--muted);
+}
+
+/* ===== Правая часть: область под карту ===== */
+.map-area {
+    position: relative;
+    flex: 1;
+    min-height: 680px;
+    overflow: hidden;
+    background: #DCFCE7;
+}
+
+/* Сюда подключается Яндекс Карта (см. js/map.js).
+   z-index: 0 запирает внутри все слои карты, поэтому легенда, чат и кнопки лежат поверх неё */
+.map-area__canvas {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 0;
+    font: inherit;
+}
+
+.map-area__add {
+    position: absolute;
+    top: 24px;
+    right: 24px;
+    z-index: 2;
+}
+
+/* ===== Легенда ===== */
+.legend {
+    position: absolute;
+    top: 24px;
+    left: 24px;
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    margin: 0;
+    padding: 12px 16px;
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    background: #fff;
+    list-style: none;
+}
+
+.legend__item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--muted);
+}
+
+.legend__dot {
+    flex: none;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+}
+
+.legend__dot--primary { background: var(--primary); }
+.legend__dot--accent  { background: var(--accent); }
+.legend__dot--ink     { background: var(--ink); }
+
+/* ===== Карточка выбранной группы ===== */
+.popup {
+    position: absolute;
+    top: 140px;
+    left: 24px;
+    z-index: 2;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 18px 20px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.08);
+}
+
+.popup__title {
+    margin: 0;
+    font-size: 20px;
+    line-height: 1.2;
+}
+
+.popup__text {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.popup__actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.popup__actions .btn {
+    padding: 10px 14px;
+    font-size: 14px;
+}
+
+.popup__note {
+    margin: 0;
+    font-size: 12px;
+    color: var(--muted);
+}
+
+/* ===== Мини-чат ===== */
+.chat {
+    position: absolute;
+    right: 24px;
+    bottom: 24px;
+    z-index: 3;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.chat__check {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+    pointer-events: none;
+}
+
+/* Кнопка-переключатель нужна только на телефоне */
+.chat__toggle {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.2);
+    color: #fff;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.chat__toggle:hover {
+    transform: scale(1.08);
+}
+
+/* Когда чат открыт, кнопка темнеет */
+.chat__check:checked + .chat__toggle {
+    background: var(--ink);
+}
+
+.chat__check:focus-visible + .chat__toggle {
+    outline: 2px solid var(--ink);
+    outline-offset: 2px;
+}
+
+.chat__panel {
+    width: 300px;
+    display: none;
+    flex-direction: column;
+    overflow: hidden;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.12);
+}
+
+.chat__check:checked ~ .chat__panel {
+    display: flex;
+}
+
+.chat__head {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 12px 16px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.chat__title {
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.chat__timer {
+    font-size: 12px;
+    color: var(--soft);
+}
+
+.chat__messages {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-height: 120px;
+    padding: 14px 16px;
+}
+
+.chat__msg {
+    align-self: flex-start;
+    max-width: 85%;
+    margin: 0;
+    padding: 8px 12px;
+    border-radius: 12px;
+    background: var(--bg);
+    font-size: 13px;
+}
+
+.chat__msg--out {
+    align-self: flex-end;
+    background: var(--primary);
+    color: #fff;
+}
+
+.chat__form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 12px;
+    border-top: 1px solid var(--border);
+}
+
+.chat__input {
+    flex: 1;
+    min-width: 0;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    background: var(--bg);
+    font: inherit;
+    font-size: 13px;
+    color: var(--ink);
+}
+
+.chat__input:focus {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+.chat__send {
+    flex: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    border: 0;
+    border-radius: 12px;
+    background: var(--primary);
+    color: #fff;
+    cursor: pointer;
+}
+
+/* ===== Яндекс Карта: метки и карточки ===== */
+/* Корневой элемент метки: нулевого размера, стоит ровно в точке на карте */
+.ymarker {
+    position: relative;
+    width: 0;
+    height: 0;
+}
+
+.ypin {
+    position: absolute;
+    left: -17px;
+    top: -17px;
+    width: 34px;
+    height: 34px;
+    padding: 0;
+    border: 5px solid #fff;
+    border-radius: 50%;
+    background: var(--primary);
+    box-shadow: 0 2px 8px rgba(15, 23, 42, 0.35);
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.ypin:hover,
+.ypin:focus-visible {
+    transform: scale(1.2);
+}
+
+.ypin--primary { background: var(--primary); }
+.ypin--accent  { background: var(--accent); }
+
+/* Карточка стоит НАД меткой (bottom больше радиуса метки), поэтому метку не закрывает */
+.ypopup {
+    position: absolute;
+    bottom: 28px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 240px;
+    padding: 16px 18px;
+    border-radius: 18px;
+    background: #fff;
+    box-shadow: 0 12px 24px rgba(15, 23, 42, 0.18);
+    font-size: 14px;
+    line-height: 1.4;
+    cursor: default;
+}
+
+.ypopup[hidden] {
+    display: none;
+}
+
+/* Если сверху нет места, карточка открывается ПОД меткой */
+.ypopup--below {
+    bottom: auto;
+    top: 28px;
+}
+
+.ypopup--below::after {
+    bottom: auto;
+    top: -8px;
+}
+
+/* Треугольник-«хвостик» к метке (--shift задаёт JS, когда карточка сдвинута от края) */
+.ypopup::after {
+    content: "";
+    position: absolute;
+    left: calc(50% - var(--shift, 0px));
+    bottom: -8px;
+    width: 16px;
+    height: 16px;
+    background: #fff;
+    transform: translateX(-50%) rotate(45deg);
+    border-radius: 3px;
+}
+
+.ypopup__close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    width: 28px;
+    height: 28px;
+    border: 0;
+    border-radius: 50%;
+    background: transparent;
+    color: var(--muted);
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.ypopup__close:hover {
+    background: var(--bg);
+    color: var(--ink);
+}
+
+.gp {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.gp__title {
+    margin: 4px 0 0;
+    font-size: 18px;
+    line-height: 1.2;
+    color: var(--ink);
+}
+
+.gp__text {
+    margin: 0;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.gp__btn {
+    align-self: stretch;
+    margin-top: 6px;
+    padding: 10px 14px;
+    font-size: 14px;
+}
+
+.map__error {
+    margin: 0;
+    padding: 24px;
+    text-align: center;
+    color: var(--muted);
+}
+
+/* ===== Компьютер и планшет: карта стоит на месте, прокручивается только левая панель ===== */
+@media (min-width: 768px) {
+    .sidebar {
+        overflow-y: auto;
+        scrollbar-gutter: stable;
+    }
+
+    .page--map {
+        height: 100vh;
+    }
+
+    .map-page {
+        min-height: 0;
+    }
+
+    .sidebar {
+        overflow-y: auto;
+    }
+
+    .map-area {
+        min-height: 0;
+    }
+}
+
+/* ===== Планшет (до 1199px) ===== */
+@media (max-width: 1199px) {
+    .sidebar {
+        flex-basis: 360px;
+    }
+}
+
+/* ===== Телефон (до 767px) ===== */
+@media (max-width: 767px) {
+    /* Колонка: сверху карта, под ней панель */
+    .map-page {
+        flex-direction: column;
+    }
+
+    .map-area {
+        order: -1;
+        flex: none;
+        height: 540px;
+        min-height: 0;
+    }
+
+    .sidebar {
+        flex: none;
+        padding: 20px 16px;
+        border-top: 1px solid var(--border);
+        border-right: 0;
+    }
+
+    /* Элементы поверх карты */
+    .map-area__add {
+        top: 16px;
+        right: 16px;
+        padding: 10px 14px;
+        font-size: 14px;
+    }
+
+    .legend {
+        top: 16px;
+        left: 16px;
+        padding: 10px 12px;
+    }
+
+    .popup {
+        top: 132px;
+        left: 16px;
+        right: 16px;
+        width: auto;
+    }
+
+    /* Чат сворачивается в кнопку */
+    .chat {
+        right: 16px;
+        bottom: 16px;
+    }
+
+    .chat__panel {
+        width: calc(100vw - 32px);
+        max-width: 340px;
+    }
+}

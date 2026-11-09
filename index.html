@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Найди партнёра - Гродно</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="page">
+        <header class="header">
+            <a class="logo" href="index.html" aria-label="Найди партнёра">
+                <svg class="logo__mark" viewBox="0 0 52 52" width="36" height="36" aria-hidden="true">
+                    <path class="logo__pin" d="M26 2C14 2 6 11 6 22c0 13 20 28 20 28s20-15 20-28C46 11 38 2 26 2z"></path>
+                    <circle class="logo__hole" cx="26" cy="22" r="11"></circle>
+                    <circle class="logo__dot" cx="26" cy="22" r="5"></circle>
+                </svg>
+                <span class="logo__text">Найди партнёра</span>
+            </a>
+
+            <input class="burger__input" type="checkbox" id="burger" aria-label="Открыть меню">
+            <label class="burger" for="burger">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </label>
+
+            <nav class="nav">
+                <a class="nav__link" href="map.html">Карта</a>
+                <a class="nav__link" href="chats.html">Чаты</a>
+                <a class="nav__link" href="#groups">Группы сегодня</a>
+                <a class="nav__link" href="#how">Как это работает</a>
+            </nav>
+
+            <div class="auth">
+                <a class="btn btn--outline" href="login.html">Войти</a>
+                <a class="btn btn--primary" href="register.html">Регистрация</a>
+                <button class="user" type="button" id="userBtn" aria-haspopup="dialog" aria-controls="authDialog" aria-label="Личный кабинет">
+                    <svg class="user__icon" viewBox="0 0 24 24" width="22" height="22" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="main">
+            <section class="hero">
+                <div class="hero__text">
+                    <span class="chip chip--soft">Гродно · сегодня</span>
+                    <h1 class="hero__title">Найди партнёра для игры уже сегодня</h1>
+                    <p class="hero__lead">
+                        Поставь метку на карте: «волейбол в 18:00» или «шахматы в коворкинге».
+                        Мы соберём людей рядом в группу и откроем мини-чат за 2 часа до встречи.
+                    </p>
+
+                    <ul class="sports">
+                        <li class="sports__item">Волейбол</li>
+                        <li class="sports__item">Баскетбол</li>
+                        <li class="sports__item">Футбол</li>
+                        <li class="sports__item">Теннис</li>
+                        <li class="sports__item">Бадминтон</li>
+                    </ul>
+
+                    <div class="hero__actions">
+                        <a class="btn btn--primary btn--lg" href="map.html">Открыть карту</a>
+                    </div>
+
+                    
+                </div>
+
+                <div class="hero__map">
+                    <div class="map">
+                        <span class="map__road map__road--h"></span>
+                        <span class="map__road map__road--v"></span>
+                        <span class="map__road map__road--v2"></span>
+
+                        <span class="map__park"></span>
+
+                        <div class="pin pin--1" aria-hidden="true">
+                            <span class="pin__label">Волейбол · 18:00<br><small>3 из 6 · Парк Жилибера</small></span>
+                            <span class="pin__dot"></span>
+                        </div>
+                        <div class="pin pin--2" aria-hidden="true">
+                            <span class="pin__label">Шахматы · 19:30<br><small>1 из 2 · Коворкинг</small></span>
+                            <span class="pin__dot pin__dot--amber"></span>
+                        </div>
+                        <div class="pin pin--3" aria-hidden="true">
+                            <span class="pin__label">Баскетбол · 20:00<br><small>4 из 10 · Неман</small></span>
+                            <span class="pin__dot"></span>
+                        </div>
+
+                        <div class="map__chat">
+                            <strong>Мини-чат группы</strong>
+                            <span>Откроется за 2 часа до встречи</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section class="groups" id="groups">
+                <div class="groups__head">
+                    <h2 class="groups__title">Группы сегодня рядом</h2>
+                </div>
+
+                <div class="groups__list">
+                    <article class="group">
+                        <span class="chip chip--soft">Набирается</span>
+                        <h3 class="group__name">Волейбол</h3>
+                        <p class="group__info">18:00 · Парк Жилибера</p>
+                        <div class="progress"><span class="progress__bar" style="width: 50%"></span></div>
+                        <p class="group__meta">3 из 6 участников · чат за 2 часа до начала</p>
+                        <button class="btn btn--primary group__btn" type="button" data-open-auth>Присоединиться</button>
+                    </article>
+
+                    <article class="group">
+                        <span class="chip chip--amber">Нужен 1 игрок</span>
+                        <h3 class="group__name">Шахматы</h3>
+                        <p class="group__info">19:30 · Коворкинг в центре</p>
+                        <div class="progress"><span class="progress__bar" style="width: 50%"></span></div>
+                        <p class="group__meta">1 из 2 участников · чат за 2 часа до начала</p>
+                        <button class="btn btn--primary group__btn" type="button" data-open-auth>Присоединиться</button>
+                    </article>
+
+                    <article class="group">
+                        <span class="chip chip--soft">Набирается</span>
+                        <h3 class="group__name">Баскетбол</h3>
+                        <p class="group__info">20:00 · Площадка у ЦСК «Неман»</p>
+                        <div class="progress"><span class="progress__bar" style="width: 40%"></span></div>
+                        <p class="group__meta">4 из 10 участников · чат за 2 часа до начала</p>
+                        <button class="btn btn--primary group__btn" type="button" data-open-auth>Присоединиться</button>
+                    </article>
+                </div>
+            </section>
+            <section class="how" id="how">
+                <h2 class="how__title">Как это работает</h2>
+                <ol class="steps">
+                    <li class="step">
+                        <span class="step__num">1</span>
+                        <h3 class="step__title">Поставь метку</h3>
+                        <p class="step__text">Выбери активность, время и место на карте Гродно.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step__num">2</span>
+                        <h3 class="step__title">Группа соберётся сама</h3>
+                        <p class="step__text">Запросы рядом по времени и месту объединяются в одну группу.</p>
+                    </li>
+                    <li class="step">
+                        <span class="step__num">3</span>
+                        <h3 class="step__title">Мини-чат за 2 часа</h3>
+                        <p class="step__text">Участники группы договариваются в чате, он закрывается после встречи.</p>
+                    </li>
+                </ol>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <span class="footer__name">Найди партнёра · Гродно  </span>
+            <span class="footer__note">Учебный проект</span>
+        </footer>
+    </div>
+    <script>
+        const burger = document.getElementById('burger');
+        document.querySelectorAll('.nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                burger.checked = false;
+            });
+        });
+    </script>
+    <dialog class="auth-dialog" id="authDialog" aria-labelledby="authDialogTitle">
+        <div class="auth-dialog__card">
+            <button class="auth-dialog__close" type="button" aria-label="Закрыть" data-close>&times;</button>
+            <img class="auth-dialog__logo" src="img/logo.svg" alt="" width="72" height="72">
+            <h2 class="auth-dialog__title" id="authDialogTitle">Найди партнёра</h2>
+            <p class="auth-dialog__text">
+                Войдите или зарегистрируйтесь, чтобы ставить метки на карте Гродно,
+                присоединяться к группам и общаться в чате.
+            </p>
+            <div class="auth-dialog__actions">
+                <a class="btn btn--primary btn--lg" href="login.html">Войти</a>
+                <a class="btn btn--outline btn--lg" href="register.html">Регистрация</a>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="js/auth-dialog.js"></script>
+</body>
+</html>

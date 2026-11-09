@@ -1,0 +1,227 @@
+/* ===== Каркас страниц входа и регистрации ===== */
+/* Полоса прокрутки занимает место всегда, поэтому при переходе между страницами ничего не сдвигается */
+html:has(.login) {
+    scrollbar-gutter: stable;
+}
+
+.login {
+    min-height: 100vh;
+    display: flex;
+}
+
+.login__main {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 48px 24px;
+}
+
+/* ===== Левая панель ===== */
+.promo {
+    position: sticky;
+    top: 0;
+    align-self: flex-start;
+    height: 100vh;
+    flex: 0 0 640px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 48px;
+    padding: 64px 80px;
+    background: var(--primary);
+    color: #fff;
+}
+
+.promo .logo {
+    align-self: flex-start;
+    color: #fff;
+}
+
+.promo .logo__pin {
+    fill: #fff;
+}
+
+.promo .logo__hole {
+    fill: var(--primary);
+}
+
+.promo__body {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.promo__title {
+    margin: 0;
+    max-width: 480px;
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1.15;
+}
+
+.promo__text {
+    margin: 0;
+    max-width: 460px;
+    font-size: 17px;
+    color: var(--soft);
+}
+
+.benefits {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.benefits__item {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 15px;
+    font-weight: 600;
+}
+
+.benefits__item::before {
+    content: "";
+    flex: none;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #99F6E4;
+}
+
+/* ===== Карточка с формой ===== */
+.card {
+    width: 100%;
+    max-width: 440px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    padding: 40px;
+    border: 1px solid var(--border);
+    border-radius: 24px;
+    background: #fff;
+}
+
+.card__title {
+    margin: 0;
+    font-size: 32px;
+    line-height: 1.2;
+}
+
+.card__lead {
+    margin: 0;
+    font-size: 15px;
+    color: var(--muted);
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form .field {
+    flex: none;
+}
+
+.field__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.field__link {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.field__link:hover {
+    text-decoration: underline;
+}
+
+.form .btn {
+    margin-top: 4px;
+    font-family: inherit;
+    cursor: pointer;
+}
+
+.card__switch {
+    margin: 0;
+    text-align: center;
+    font-size: 14px;
+    color: var(--muted);
+}
+
+.card__link {
+    font-weight: 600;
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.card__link:hover {
+    text-decoration: underline;
+}
+
+/* ===== Планшет (до 1023px) ===== */
+@media (max-width: 1023px) {
+    .promo {
+        flex: 0 0 360px;
+        padding: 48px 40px;
+    }
+
+    .promo__title {
+        font-size: 32px;
+    }
+}
+
+/* ===== Телефон (до 767px) ===== */
+@media (max-width: 767px) {
+    .login {
+        flex-direction: column;
+    }
+
+    .promo {
+        position: static;
+        align-self: stretch;
+        height: auto;
+        flex: none;
+        gap: 20px;
+        padding: 24px 16px;
+    }
+
+    .promo__title {
+        font-size: 26px;
+    }
+
+    .promo__text,
+    .benefits {
+        display: none;
+    }
+
+    .login__main {
+        align-items: flex-start;
+        padding: 24px 16px 40px;
+    }
+
+    .card {
+        padding: 28px 20px;
+    }
+}
+
+/* ===== Узкие телефоны (до 400px) ===== */
+@media (max-width: 400px) {
+    .card {
+        padding: 24px 16px;
+        border-radius: 20px;
+    }
+
+    .card__title {
+        font-size: 28px;
+    }
+}

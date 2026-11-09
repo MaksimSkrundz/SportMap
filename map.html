@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Карта - Найди партнёра</title>
+    <link rel="icon" type="image/svg+xml" href="favicon.svg">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/map.css">
+</head>
+<body>
+    <div class="page page--map">   
+        <header class="header">
+            <a class="logo" href="index.html" aria-label="Найди партнёра">
+                <svg class="logo__mark" viewBox="0 0 52 52" width="36" height="36" aria-hidden="true">
+                    <path class="logo__pin" d="M26 2C14 2 6 11 6 22c0 13 20 28 20 28s20-15 20-28C46 11 38 2 26 2z"></path>
+                    <circle class="logo__hole" cx="26" cy="22" r="11"></circle>
+                    <circle class="logo__dot" cx="26" cy="22" r="5"></circle>
+                </svg>
+                <span class="logo__text">Найди партнёра</span>
+            </a>
+
+            <input class="burger__input" type="checkbox" id="burger" aria-label="Открыть меню">
+            <label class="burger" for="burger">
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+                <span class="burger__line"></span>
+            </label>
+
+            <nav class="nav">
+                <a class="nav__link nav__link--active" href="map.html" aria-current="page">Карта</a>
+                <a class="nav__link" href="chats.html">Чаты</a>
+                <a class="nav__link" href="index.html#groups">Группы сегодня</a>
+                <a class="nav__link" href="index.html#how">Как это работает</a>
+            </nav>
+
+            <div class="auth">
+                <a class="btn btn--outline" href="login.html">Войти</a>
+                <a class="btn btn--primary" href="register.html">Регистрация</a>
+                <button class="user" type="button" id="userBtn" aria-haspopup="dialog" aria-controls="authDialog" aria-label="Личный кабинет">
+                    <svg class="user__icon" viewBox="0 0 24 24" width="22" height="22" fill="none"
+                        stroke="currentColor" stroke-width="2" stroke-linecap="round"
+                        stroke-linejoin="round" aria-hidden="true">
+                        <circle cx="12" cy="8" r="4"></circle>
+                        <path d="M4 21c0-4 3.6-7 8-7s8 3 8 7"></path>
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="main map-page">
+            <aside class="sidebar">
+                <h1 class="sidebar__title">Метки в Гродно</h1>
+
+                <input class="field__control" type="search" name="q"
+                    placeholder="Поиск по месту или активности" aria-label="Поиск по месту или активности">
+
+                <div class="filters">
+                    <div class="filters__group" role="radiogroup" aria-labelledby="f-sport">
+                        <span class="filters__title" id="f-sport">Активность</span>
+                        <div class="filters__row">
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="all" checked>
+                                <span class="filter__text">Все</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="volleyball">
+                                <span class="filter__text">Волейбол</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="basketball">
+                                <span class="filter__text">Баскетбол</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="football">
+                                <span class="filter__text">Футбол</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="tennis">
+                                <span class="filter__text">Теннис</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="sport" value="badminton">
+                                <span class="filter__text">Бадминтон</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="filters__group" role="radiogroup" aria-labelledby="f-time">
+                        <span class="filters__title" id="f-time">Время</span>
+                        <div class="filters__row">
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="time" value="now">
+                                <span class="filter__text">Сейчас</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="time" value="today" checked>
+                                <span class="filter__text">Сегодня</span>
+                            </label>
+                            <label class="filter">
+                                <input class="filter__input" type="radio" name="time" value="tomorrow">
+                                <span class="filter__text">Завтра</span>
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <p class="sidebar__count">Найдено 3 группы</p>
+
+                <ul class="results">
+                    <li class="results__item" data-sport="volleyball">
+                        <a data-group="1" class="result result--active" href="#popup">
+                            <span class="result__row">
+                                <span class="chip chip--soft">Набирается</span>
+                                <span class="result__time">18:00</span>
+                            </span>
+                            <span class="result__name">Волейбол</span>
+                            <span class="result__text">Парк Жилибера · 1,2 км</span>
+                            <span class="result__text">3 из 6 · чат с 16:00</span>
+                        </a>
+                    </li>
+                    <li class="results__item" data-sport="badminton">
+                        <a data-group="2" class="result" href="#popup">
+                            <span class="result__row">
+                                <span class="chip chip--amber">Нужен 1 игрок</span>
+                                <span class="result__time">19:30</span>
+                            </span>
+                            <span class="result__name">Бадминтон</span>
+                            <span class="result__text">Спорткомплекс в центре · 0,8 км</span>
+                            <span class="result__text">1 из 2 · чат с 17:30</span>
+                        </a>
+                    </li>
+                    <li class="results__item" data-sport="basketball">
+                        <a data-group="3" class="result" href="#popup">
+                            <span class="result__row">
+                                <span class="chip chip--soft">Набирается</span>
+                                <span class="result__time">20:00</span>
+                            </span>
+                            <span class="result__name">Баскетбол</span>
+                            <span class="result__text">Площадка у ЦСК «Неман» · 2,4 км</span>
+                            <span class="result__text">4 из 10 · чат с 18:00</span>
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <section class="map-area" aria-label="Карта">
+                <div class="map-area__canvas" id="map" role="application" aria-label="Карта Гродно с метками"></div>
+
+                <button class="btn btn--primary map-area__add" type="button" id="addMarkBtn">Поставить метку</button>
+
+                <ul class="legend" aria-label="Обозначения на карте">
+                    <li class="legend__item"><span class="legend__dot legend__dot--primary"></span>Набирается</li>
+                    <li class="legend__item"><span class="legend__dot legend__dot--accent"></span>Скоро</li>
+                    <li class="legend__item"><span class="legend__dot legend__dot--ink"></span>Чат открыт</li>
+                </ul>
+
+                <div class="chat">
+                    <input class="chat__check" type="checkbox" id="chat-check" aria-label="Открыть чат">
+                    <label class="chat__toggle" for="chat-check" title="Чат группы">
+                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                            <path d="M3 6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8l-3 3v-3a2 2 0 0 1-2-2z"/>
+                            <path d="M18 9h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2v3l-3-3h-5a2 2 0 0 1-2-2v-1"/>
+                        </svg>
+                    </label>
+
+                    <div class="chat__panel">
+                        <div class="chat__head">
+                            <span class="chat__title">Чат · Бадминтон 19:30</span>
+                            <span class="chat__timer">Закроется через 1:42</span>
+                        </div>
+
+                        <div class="chat__messages">
+                            <p class="chat__msg">Играю в среднем темпе, подходит?</p>
+                            <p class="chat__msg chat__msg--out">Да, буду в 19:30</p>
+                        </div>
+
+                        <form class="chat__form" action="#" method="post">
+                            <input class="chat__input" type="text" name="message"
+                                placeholder="Введите сообщение…" aria-label="Сообщение">
+                            <button class="chat__send" type="submit" aria-label="Отправить">
+                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
+                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                                    <path d="M22 2L11 13"></path>
+                                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
+                                </svg>
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </section>
+
+        </main>
+    </div>
+
+    <script src="https://api-maps.yandex.ru/v3/?apikey=1e3ed427-2f0c-4e97-90f7-6714844643f2&lang=ru_RU"></script>
+    <script src="js/map.js"></script>
+    <script>
+        const burger = document.getElementById('burger');
+        document.querySelectorAll('.nav a').forEach(function (link) {
+            link.addEventListener('click', function () {
+                burger.checked = false;
+            });
+        });
+    </script>
+    <dialog class="auth-dialog" id="authDialog" aria-labelledby="authDialogTitle">
+        <div class="auth-dialog__card">
+            <button class="auth-dialog__close" type="button" aria-label="Закрыть" data-close>&times;</button>
+            <img class="auth-dialog__logo" src="img/logo.svg" alt="" width="72" height="72">
+            <h2 class="auth-dialog__title" id="authDialogTitle">Найди партнёра</h2>
+            <p class="auth-dialog__text">
+                Войдите или зарегистрируйтесь, чтобы ставить метки на карте Гродно,
+                присоединяться к группам и общаться в чате.
+            </p>
+            <div class="auth-dialog__actions">
+                <a class="btn btn--primary btn--lg" href="login.html">Войти</a>
+                <a class="btn btn--outline btn--lg" href="register.html">Регистрация</a>
+            </div>
+        </div>
+    </dialog>
+
+    <script src="js/auth-dialog.js"></script>
+</body>
+</html>
