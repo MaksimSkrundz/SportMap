@@ -42,12 +42,11 @@
             '<p class="gp__text">' + g.have + ' из ' + g.total + ' · чат с ' + g.chat + '</p>' +
             (g.status === 'full'
                 ? '<span class="btn gp__btn gp__btn--full">Группа набрана</span>'
-                : '<a class="btn btn--primary gp__btn" href="#">Присоединиться</a>') +
+                : '<button class="btn btn--primary gp__btn" type="button" data-open-auth>Присоединиться</button>') +
             '</div>';
     }
 
     async function initMap() {
-        // 1. Ждём, пока Яндекс загрузит все свои компоненты
         await ymaps3.ready;
 
         var YMap = ymaps3.YMap;
@@ -56,14 +55,12 @@
         var YMapMarker = ymaps3.YMapMarker;
         var YMapControls = ymaps3.YMapControls;
 
-        // 2. Создаём карту в нашем контейнере #map
         var map = new YMap(
             mapBox,
             { location: { center: GRODNO, zoom: 13 } },
             [new YMapDefaultSchemeLayer({}), new YMapDefaultFeaturesLayer({})]
         );
 
-        // Курсор «сжатая рука»
         mapBox.addEventListener('pointerdown', function (e) {
             if (e.button !== 0) return;
             if (e.target.closest('.ymarker, button, a, [role="button"]')) return;
@@ -75,7 +72,6 @@
             });
         });
 
-        // 3. Кнопки масштаба «+ / −» лежат в отдельном пакете Яндекса
         try {
             ymaps3.import.registerCdn('https://cdn.jsdelivr.net/npm/{package}',
                 ['@yandex/ymaps3-default-ui-theme@0.0']);
@@ -85,10 +81,7 @@
             console.warn('Кнопки масштаба не загрузились:', e);
         }
 
-        /* ---------- Метки ----------
-           Метка в API 3.0 — это обычный HTML-элемент. Карточку-окно в v3 нужно делать самим:
-           кладём её внутрь того же элемента и показываем/прячем атрибутом hidden. */
-        var items = {};      // id группы -> { group, marker, popup, onMap }
+        var items = {};
         var openedId = null;
         var resultLinks = document.querySelectorAll('.result');
 
@@ -104,9 +97,9 @@
             item.popup.hidden = true;
             item.marker.update({ zIndex: 1 });
             openedId = null;
+            setActive(null); 
         }
 
-        // Карточка не должна выходить за края карты: сдвигаем её внутрь, а если сверху нет места, открываем под меткой
         function keepInside(popup) {
             popup.style.transform = '';
             popup.style.setProperty('--shift', '0px');
@@ -124,7 +117,7 @@
             else if (rect.right > box.right - gap) dx = box.right - gap - rect.right;
             if (dx) {
                 popup.style.transform = 'translateX(calc(-50% + ' + dx + 'px))';
-                popup.style.setProperty('--shift', dx + 'px'); // «хвостик» остаётся у метки
+                popup.style.setProperty('--shift', dx + 'px'); 
             }
         }
 
@@ -134,7 +127,7 @@
             var item = items[id];
             item.popup.hidden = false;
             keepInside(item.popup);
-            item.marker.update({ zIndex: 2000 }); // открытая карточка поверх остальных меток
+            item.marker.update({ zIndex: 2000 });
             openedId = id;
             setActive(id);
         }
@@ -175,7 +168,6 @@
             if (!event.target.closest('.ymarker')) closePopup();
         });
 
-        /* ---------- Показать все видимые метки ---------- */
         function fitVisible() {
             var visible = GROUPS.filter(function (g) { return items[g.id].onMap; });
             if (!visible.length) return;
@@ -190,7 +182,6 @@
             var minLat = Math.min.apply(null, lats), maxLat = Math.max.apply(null, lats);
             var padLng = Math.max((maxLng - minLng) * 0.3, 0.004);
             var padLat = Math.max((maxLat - minLat) * 0.3, 0.003);
-            // bounds: [[левый-нижний угол], [правый-верхний угол]], каждый — [долгота, широта]
             map.setLocation({
                 bounds: [[minLng - padLng, minLat - padLat], [maxLng + padLng, maxLat + padLat]],
                 duration: 400
@@ -198,7 +189,6 @@
         }
         fitVisible();
 
-        /* ---------- Клик по группе в списке слева ---------- */
         resultLinks.forEach(function (link) {
             link.addEventListener('click', function (event) {
                 event.preventDefault();
@@ -208,23 +198,19 @@
                 map.setLocation({ center: lngLat(items[id].group), zoom: 15, duration: FLY_MS });
                 openPopup(id);
 
-                // Пока карта едет к метке, сбрасываем сдвиг карточки: он был посчитан для старого положения
                 var popup = items[id].popup;
                 popup.style.transform = '';
                 popup.style.setProperty('--shift', '0px');
                 popup.classList.remove('ypopup--below');
 
-                // Когда карта доехала, считаем положение карточки заново (уже для нового положения метки)
                 setTimeout(function () {
                     if (openedId === id) keepInside(popup);
                 }, FLY_MS + 100);
 
-                // На телефоне карта над списком: возвращаем её в поле зрения
                 mapBox.scrollIntoView({ behavior: 'smooth', block: 'center' });
             });
         });
 
-        /* ---------- Фильтр по активности ---------- */
         var countEl = document.querySelector('.sidebar__count');
         var listItems = document.querySelectorAll('.results__item');
 

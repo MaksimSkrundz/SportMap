@@ -105,11 +105,11 @@
                     </div>
                 </div>
 
-                <p class="sidebar__count">Найдено 3 группы</p>
+                <p class="sidebar__count">Найдено 4 группы</p>
 
                 <ul class="results">
                     <li class="results__item" data-sport="volleyball">
-                        <a data-group="1" class="result result--active" href="#popup">
+                        <a data-group="1" class="result" href="#popup">
                             <span class="result__row">
                                 <span class="chip chip--soft">Набирается</span>
                                 <span class="result__time">18:00</span>
@@ -141,13 +141,24 @@
                             <span class="result__text">4 из 10 · чат с 18:00</span>
                         </a>
                     </li>
+                    <li class="results__item" data-sport="tennis">
+                        <a data-group="4" class="result" href="#popup">
+                            <span class="result__row">
+                                <span class="chip chip--full">Набрано</span>
+                                <span class="result__time">21:00</span>
+                            </span>
+                            <span class="result__name">Теннис</span>
+                            <span class="result__text">Корты на Фолюш</span>
+                            <span class="result__text">4 из 4 · чат с 19:00</span>
+                        </a>
+                    </li>
                 </ul>
             </aside>
 
             <section class="map-area" aria-label="Карта">
                 <div class="map-area__canvas" id="map" role="application" aria-label="Карта Гродно с метками"></div>
 
-                <button class="btn btn--primary map-area__add" type="button" id="addMarkBtn">Поставить метку</button>
+                <p class="map-area__hint">Кликните на карту, чтобы поставить метку</p>
 
                 <ul class="legend" aria-label="Обозначения на карте">
                     <li class="legend__item"><span class="legend__dot legend__dot--primary"></span>Набирается</li>
@@ -155,41 +166,6 @@
                     <li class="legend__item"><span class="legend__dot legend__dot--full"></span>Набрано</li>
                     <li class="legend__item"><span class="legend__dot legend__dot--ink"></span>Чат открыт</li>
                 </ul>
-
-                <div class="chat">
-                    <input class="chat__check" type="checkbox" id="chat-check" aria-label="Открыть чат">
-                    <label class="chat__toggle" for="chat-check" title="Чат группы">
-                        <svg viewBox="0 0 24 24" width="26" height="26" fill="none" stroke="currentColor"
-                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                            <path d="M3 6a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2H8l-3 3v-3a2 2 0 0 1-2-2z"/>
-                            <path d="M18 9h1a2 2 0 0 1 2 2v6a2 2 0 0 1-2 2v3l-3-3h-5a2 2 0 0 1-2-2v-1"/>
-                        </svg>
-                    </label>
-
-                    <div class="chat__panel">
-                        <div class="chat__head">
-                            <span class="chat__title">Чат · Бадминтон 19:30</span>
-                            <span class="chat__timer">Закроется через 1:42</span>
-                        </div>
-
-                        <div class="chat__messages">
-                            <p class="chat__msg">Играю в среднем темпе, подходит?</p>
-                            <p class="chat__msg chat__msg--out">Да, буду в 19:30</p>
-                        </div>
-
-                        <form class="chat__form" action="#" method="post">
-                            <input class="chat__input" type="text" name="message"
-                                placeholder="Введите сообщение…" aria-label="Сообщение">
-                            <button class="chat__send" type="submit" aria-label="Отправить">
-                                <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor"
-                                    stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                                    <path d="M22 2L11 13"></path>
-                                    <path d="M22 2l-7 20-4-9-9-4 20-7z"></path>
-                                </svg>
-                            </button>
-                        </form>
-                    </div>
-                </div>
             </section>
 
         </main>

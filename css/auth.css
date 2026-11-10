@@ -1,5 +1,3 @@
-/* ===== Каркас страниц входа и регистрации ===== */
-/* Полоса прокрутки занимает место всегда, поэтому при переходе между страницами ничего не сдвигается */
 html:has(.login) {
     scrollbar-gutter: stable;
 }
@@ -17,7 +15,6 @@ html:has(.login) {
     padding: 48px 24px;
 }
 
-/* ===== Левая панель ===== */
 .promo {
     position: sticky;
     top: 0;
@@ -93,7 +90,6 @@ html:has(.login) {
     background: #99F6E4;
 }
 
-/* ===== Карточка с формой ===== */
 .card {
     width: 100%;
     max-width: 440px;
@@ -128,27 +124,8 @@ html:has(.login) {
     flex: none;
 }
 
-.field__head {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.field__link {
-    font-size: 13px;
-    font-weight: 600;
-    color: var(--primary);
-    text-decoration: none;
-}
-
-.field__link:hover {
-    text-decoration: underline;
-}
-
 .form .btn {
     margin-top: 4px;
-    font-family: inherit;
-    cursor: pointer;
 }
 
 .card__switch {
@@ -168,7 +145,6 @@ html:has(.login) {
     text-decoration: underline;
 }
 
-/* ===== Планшет (до 1023px) ===== */
 @media (max-width: 1023px) {
     .promo {
         flex: 0 0 360px;
@@ -180,7 +156,6 @@ html:has(.login) {
     }
 }
 
-/* ===== Телефон (до 767px) ===== */
 @media (max-width: 767px) {
     .login {
         flex-direction: column;
@@ -214,7 +189,6 @@ html:has(.login) {
     }
 }
 
-/* ===== Узкие телефоны (до 400px) ===== */
 @media (max-width: 400px) {
     .card {
         padding: 24px 16px;

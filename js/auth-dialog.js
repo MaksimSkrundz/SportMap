@@ -1,16 +1,11 @@
-// Окно «Войдите или зарегистрируйтесь»
-// Открывается по иконке пользователя и по любой кнопке с атрибутом data-open-auth
 const authDialog = document.getElementById('authDialog');
-const openers = document.querySelectorAll('#userBtn, [data-open-auth]');
 
-// 1. Открыть: showModal() затемняет страницу и переносит фокус в окно
-openers.forEach(function (button) {
-    button.addEventListener('click', function () {
+document.addEventListener('click', function (event) {
+    if (event.target.closest('#userBtn, [data-open-auth]')) {
         authDialog.showModal();
-    });
+    }
 });
 
-// 2. Закрыть: по крестику или по клику на затемнённый фон
 authDialog.addEventListener('click', function (event) {
     const clickedBackdrop = event.target === authDialog;
     const clickedCross = event.target.closest('[data-close]');
@@ -18,5 +13,3 @@ authDialog.addEventListener('click', function (event) {
         authDialog.close();
     }
 });
-
-// Закрытие по клавише Esc браузер делает сам, ничего писать не нужно
